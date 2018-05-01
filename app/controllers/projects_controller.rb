@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :require_login, only: [:new, :create]
+  before_action :not_authenticated, only: [:new, :create]
 
   def index
     @projects = Project.all
