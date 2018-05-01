@@ -1,3 +1,11 @@
+<% if @projects.errors.full_messages.any? %>
+  <% @projects.errors.full_messages.each do |msg| %>
+    <ul>
+      <li><%= msg %></li>
+    </ul>
+  <% end %>
+<% end %>
+
 <%= form_for(@project, html: {multipart: true}) do |f| %>
   <div>
     <%= f.label :title %>
