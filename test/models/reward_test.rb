@@ -42,7 +42,7 @@ class RewardTest < ActiveSupport::TestCase
       description: 'Trade sheep',
       start_date:  Date.today,
       end_date:    Date.today + 1.month,
-      goal:        50000
+      goal:        50000 
     )
   end
 
