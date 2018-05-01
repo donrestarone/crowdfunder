@@ -5,5 +5,13 @@ class Project < ActiveRecord::Base
   belongs_to :user # project owner
 
   validates :title, :description, :goal, :start_date, :end_date, presence: true
-  validates :user, presence: true
+  validate :project_end_date_is_later_than_start_date
+
+  def project_end_date_is_later_than_start_date
+    start_date = self.start_date
+    if start_date > self.end_date
+      errors.add(:end_date, "project end date must be later than start date")
+    end
+  end
+
 end
