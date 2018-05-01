@@ -5,4 +5,5 @@ class Project < ActiveRecord::Base
   belongs_to :user # project owner
 
   validates :title, :description, :goal, :start_date, :end_date, presence: true
+  validates :user, presence: true
 end
