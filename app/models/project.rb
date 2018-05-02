@@ -24,4 +24,14 @@ class Project < ActiveRecord::Base
   	end 
   end 
 
+  def self.number_of_all_projects
+    total = Project.all.count 
+    return total
+  end 
+
+  def self.sum_of_all_pledges_for_all_projects
+    total = Pledge.all.sum(:dollar_amount) 
+    return  total
+  end 
+
 end
