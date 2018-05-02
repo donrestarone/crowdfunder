@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 #including FactoryGirl
+require 'factory_girl_rails'
 include FactoryGirl::Syntax::Methods
 
 # To generate a test coverage report for the models,
