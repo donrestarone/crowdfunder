@@ -1,5 +1,5 @@
-<% if @projects.errors.full_messages.any? %>
-  <% @projects.errors.full_messages.each do |msg| %>
+<% if @project.errors.full_messages.any? %>
+  <% @project.errors.full_messages.each do |msg| %>
     <ul>
       <li><%= msg %></li>
     </ul>
