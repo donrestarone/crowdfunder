@@ -17,6 +17,9 @@ class ProjectsController < ApplicationController
     @funding_thus_far = @project.project_funding(params[:id])
     @users = @project.users
 
+    if current_user
+      @pledge_amount = current_user.amount_pledged_to_project(@project)
+    end
   end
 
   def new
@@ -32,13 +35,14 @@ class ProjectsController < ApplicationController
     @project.start_date = params[:project][:start_date]
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
-
+    @project.user_id = current_user.id
     if @project.save
       redirect_to projects_url
     else
       render :new
     end
-   end
+  end
+
 
    def myprojects
      @projects = current_user.projects
