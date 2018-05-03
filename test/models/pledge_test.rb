@@ -20,6 +20,15 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
+  test 'sum_of_all_pledges_for_all_projects_returns_20' do
+    pledge = build(:pledge, user: new_user, project: new_project)
+    pledge.save
+    pledge2 = build(:pledge, user: new_user, project: new_project)
+    pledge2.save
+    assert_equal(20, Pledge.sum_of_all_pledges_for_all_projects)
+
+  end
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
@@ -39,5 +48,4 @@ class PledgeTest < ActiveSupport::TestCase
       password_confirmation: 'passpass'
     )
   end
-
 end
