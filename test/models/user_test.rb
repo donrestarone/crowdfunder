@@ -21,4 +21,10 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, email: "bettymaker@gmail.com", password: "1234", password_confirmation: "1234")
     refute user.valid?
   end
+
+  test "display full name method" do
+    user = build(:user, first_name: 'Mickey', last_name: 'Mouse')
+    assert_equal('Mickey Mouse', user.full_name)
+  end
+
 end
