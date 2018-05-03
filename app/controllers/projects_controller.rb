@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @funding_thus_far = @project.project_funding(params[:id])
-
+    @pledge_amount = User.find(session[:user_id]).pledges.where(project_id:@project.id).sum(:dollar_amount)
   end
 
   def new
@@ -37,6 +37,7 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
-   end
+  end
+
 
 end
