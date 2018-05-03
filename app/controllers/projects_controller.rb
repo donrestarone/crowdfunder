@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @funding_thus_far = @project.project_funding(params[:id])
+    @users = @project.users
 
   end
 
