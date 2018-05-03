@@ -4,16 +4,10 @@ class PledgeTest < ActiveSupport::TestCase
 
   test 'A pledge can be created' do
 
-    pledge1 = build(:pledge, user: new_user, project: new_project)
-
-    # pledge = Pledge.create(
-    #   dollar_amount: 99.00,
-    #   project: new_project,
-    #   user: new_user
-    # )
-    pledge1.save
-    assert pledge1.valid?
-    assert pledge1.persisted?
+    pledge = build(:pledge, user: new_user, project: new_project)
+    pledge.save
+    assert pledge.valid?
+    assert pledge.persisted?
   end
 
   test 'owner cannot back own project' do
@@ -23,9 +17,6 @@ class PledgeTest < ActiveSupport::TestCase
     project.user = owner
     project.save
     pledge = build(:pledge, project: project)
-    # pledge = Pledge.new( dollar_amount: 3.00, project: project)
-    pledge.user = owner
-    pledge.save
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
