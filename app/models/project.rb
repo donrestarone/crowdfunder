@@ -29,9 +29,32 @@ class Project < ActiveRecord::Base
     return total
   end 
 
-  def self.sum_of_all_pledges_for_all_projects
-    total = Pledge.all.sum(:dollar_amount) 
-    return  total
+  def self.how_many_projects_funded 
+    all_projects = Project.all
+    funded_projects = []
+    all_projects.each do |project|
+      Pledge.all_pledges.each do |pledge|
+        if project.id == pledge.project_id
+          funded_projects.push project
+        end 
+      end
+    end 
+    
+    funded_projects_copy = funded_projects
+    funded_projects.each do |project|
+      funded_projects_copy.each do |copy_project|
+        if project == copy_project
+          funded_projects.pop
+        end 
+      end 
+    end 
+    return funded_projects
   end 
 
+  def self.projects_waiting_to_be_funded
+    funded_projects = Project.how_many_projects_funded.count
+    total_projects = Project.all.count
+    delta = total_projects - funded_projects
+    return delta
+  end 
 end

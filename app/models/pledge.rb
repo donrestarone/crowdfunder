@@ -18,4 +18,8 @@ class Pledge < ApplicationRecord
     total = Pledge.all.sum(:dollar_amount) 
     return  total
   end 
+
+  def self.all_pledges 
+    all_pledges = Pledge.all
+  end 
 end
