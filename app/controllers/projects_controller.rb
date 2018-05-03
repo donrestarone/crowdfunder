@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :not_authenticated, only: [:new, :create]
+  before_action :not_authenticated, only: [:new, :create, :myprojects]
 
   def index
     @projects = Project.all
@@ -37,6 +37,10 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
+   end
+
+   def myprojects
+     @projects = current_user.projects
    end
 
 end
