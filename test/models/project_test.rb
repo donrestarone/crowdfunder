@@ -57,6 +57,20 @@ class ProjectTest < ActiveSupport::TestCase
     assert_empty Project.how_many_projects_funded, 'idk'
   end
 
+  test 'how_many_projects_funded_returns_one' do
+    make_pledge_to_project
+    assert_equal(1, Project.how_many_projects_funded.count)
+  end
+
+  test 'how_many_projects_funded_returns_one_when_there_are_2_projects' do
+    project = new_project
+    owner = new_user
+    project.user = owner
+    project.save
+    make_pledge_to_project
+    assert_equal(1, Project.how_many_projects_funded.count)
+  end
+
 
 
   def new_invalid_project_end_date_early
@@ -79,11 +93,15 @@ class ProjectTest < ActiveSupport::TestCase
     )
   end
 
-  def make_pledge
+  def make_pledge_to_project
     project = new_project
-    owner = new_user
+    owner = create(:user, first_name: "Cletus")
     project.user = owner
+    project.save
 
+    pledger = create(:user, first_name: "Bob")
+    a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
+    return project
   end
 
   def new_invalid_project
