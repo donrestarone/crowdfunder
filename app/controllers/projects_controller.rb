@@ -4,6 +4,12 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @projects = @projects.order(:end_date)
+
+    #variables for homepage
+    @total_num_projects = Project.number_of_all_projects
+    @sum_of_all_pledges_all_projects = Pledge.sum_of_all_pledges_for_all_projects
+    @funded_projects = Project.how_many_projects_funded.count
+    @projects_waiting_funding = Project.projects_waiting_to_be_funded
   end
 
   def show

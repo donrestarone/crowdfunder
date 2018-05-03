@@ -1,4 +1,20 @@
 <%= link_to "New Project", new_project_path %>
+  <div>
+    <p>
+  Total Ongoing Projects: <%= @total_num_projects %>
+    </p>
+    <p>
+  Sum of All Pledges Given For Projects: <%= @sum_of_all_pledges_all_projects %>
+    </p>
+    <p>
+      funded projects: <%= @funded_projects %>
+      projects awaiting to be funded: <%= @projects_waiting_funding %>
+    </p>
+  </div>
+
+
+
+
 
 <% @projects.each do |project| %>
   <article class="project">
