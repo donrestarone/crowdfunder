@@ -2,7 +2,15 @@ class ProjectsController < ApplicationController
   before_action :not_authenticated, only: [:new, :create, :myprojects]
 
   def index
-    @projects = Project.all
+   @search_query = ""
+   @projects = Project.all
+      if params[:search] && params[:search][:title] != ""
+        @search_query = params[:search][:title]
+        @projects = Project.where('title ILIKE ?', "%#{@search_query}%")
+      end
+
+      # User.where('name ilike any ( array[?] )',['%thomas%','%james%','%martin%'])
+
     @projects = @projects.order(:end_date)
 
     #variables for homepage
@@ -17,6 +25,9 @@ class ProjectsController < ApplicationController
     @funding_thus_far = @project.project_funding(params[:id])
     @users = @project.users
 
+    if current_user
+      @pledge_amount = current_user.amount_pledged_to_project(@project)
+    end
   end
 
   def new
@@ -32,16 +43,20 @@ class ProjectsController < ApplicationController
     @project.start_date = params[:project][:start_date]
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
-
+    @project.user_id = current_user.id
     if @project.save
       redirect_to projects_url
     else
       render :new
     end
-   end
+  end
+
 
    def myprojects
      @projects = current_user.projects
-   end
+     @num_projects_backed_by_self = current_user.projects_backed.count
+
+     @backed_projects_by_self = current_user.name_of_projects_backed
+    end
 
 end
