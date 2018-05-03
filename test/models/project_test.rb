@@ -71,7 +71,19 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal(1, Project.how_many_projects_funded.count)
   end
 
+  test 'how_many_projects_funded_does_not_count_duplicates' do
+    make_multiple_people_pledge_a_project
+    project = new_project
+    owner = new_user
+    project.user = owner
+    project.save
+    assert_equal(1, Project.how_many_projects_funded.count)
+  end
 
+  test 'number_of_all_projects_returns_one' do
+    make_multiple_people_pledge_a_project
+    assert_equal(1, Project.number_of_all_projects)
+  end
 
   def new_invalid_project_end_date_early
     Project.new(
@@ -101,6 +113,19 @@ class ProjectTest < ActiveSupport::TestCase
 
     pledger = create(:user, first_name: "Bob")
     a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
+    return project
+  end
+
+  def make_multiple_people_pledge_a_project
+    project = new_project
+    owner = create(:user, first_name: "Cletus")
+    project.user = owner
+    project.save
+
+    pledger1 = create(:user, first_name: "Bob")
+    pledger2 = create(:user, first_name: "Bobby")
+    a_pledge = Pledge.create(dollar_amount: 12, user: pledger1, project_id: project.id)
+    another_pledge = Pledge.create(dollar_amount: 12, user: pledger2, project_id: project.id)
     return project
   end
 
