@@ -24,6 +24,12 @@ class Project < ActiveRecord::Base
   	end 
   end 
 
+  def project_funding(project_id)
+    project = Project.find(project_id)
+    funding_thus_far = project.pledges.sum(:dollar_amount)
+    return funding_thus_far
+  end 
+
   def self.number_of_all_projects
     total = Project.all.count 
     return total
