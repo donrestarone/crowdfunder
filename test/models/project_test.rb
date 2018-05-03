@@ -40,6 +40,25 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.invalid?, "project should not save if goal is negative"
   end
 
+  test 'project_date_must_be_in_future' do
+
+    project = new_invalid_project
+    owner = new_user
+    project.user = owner
+    project.save
+    assert project.invalid?, 'project should not save if date is not in the future'
+  end
+
+  test 'how_many_projects_funded_returns_nil' do
+    project = new_project
+    owner = new_user
+    project.user = owner
+    project.save
+    assert_empty Project.how_many_projects_funded, 'idk'
+  end
+
+
+
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',
@@ -60,14 +79,12 @@ class ProjectTest < ActiveSupport::TestCase
     )
   end
 
-  test 'project_date_must_be_in_future' do 
-
-    project = new_invalid_project
+  def make_pledge
+    project = new_project
     owner = new_user
     project.user = owner
-    project.save
-    assert project.invalid?, 'project should not save if date is not in the future'
-  end 
+
+  end
 
   def new_invalid_project
     Project.new(
@@ -77,7 +94,7 @@ class ProjectTest < ActiveSupport::TestCase
       end_date:    Date.today - 1.month,
       goal:        50000
       )
-  end 
+  end
 
   def new_project
     Project.new(
