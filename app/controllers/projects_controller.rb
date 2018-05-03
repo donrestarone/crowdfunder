@@ -23,6 +23,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @funding_thus_far = @project.project_funding(params[:id])
+    @users = @project.users
+
     if current_user
       @pledge_amount = current_user.amount_pledged_to_project(@project)
     end

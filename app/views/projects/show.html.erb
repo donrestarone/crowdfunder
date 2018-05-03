@@ -32,3 +32,11 @@
 <% end %>
 
 <%= link_to "Add new reward", new_project_reward_path(@project) %>
+<% if current_user %>
+  <h2>People backed this project</h2>
+  <ul>
+    <% @project.users.each do |user| %>
+        <li><%= user.full_name %></li>
+    <% end %>
+  </ul>
+<% end %>
