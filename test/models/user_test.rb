@@ -22,6 +22,7 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
   end
 
+
   test 'projects_backed_returns_empty' do
     user = build(:user)
     assert_empty user.projects_backed
@@ -53,4 +54,5 @@ class UserTest < ActiveSupport::TestCase
       goal:        50000
     )
   end
+
 end

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
+ 
   def projects_backed
     return self.pledges
   end
@@ -20,6 +21,11 @@ class User < ActiveRecord::Base
       projects.push Project.find(pledge.project_id)
     end
     return projects
+  end
+  
+  def amount_pledged_to_project(project)
+    pledges.where(project_id:project.id).sum(:dollar_amount)
+ 
   end
 
 end
