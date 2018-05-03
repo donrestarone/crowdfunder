@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @funding_thus_far = @project.project_funding(params[:id])
     if current_user
-      @pledge_amount = current_user.pledges.where(project_id:@project.id).sum(:dollar_amount)
+      @pledge_amount = current_user.amount_pledged_to_project(@project)
     end
   end
 

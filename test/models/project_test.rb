@@ -60,14 +60,14 @@ class ProjectTest < ActiveSupport::TestCase
     )
   end
 
-  test 'project_date_must_be_in_future' do 
+  test 'project_date_must_be_in_future' do
 
     project = new_invalid_project
     owner = new_user
     project.user = owner
     project.save
     assert project.invalid?, 'project should not save if date is not in the future'
-  end 
+  end
 
   def new_invalid_project
     Project.new(
@@ -77,7 +77,7 @@ class ProjectTest < ActiveSupport::TestCase
       end_date:    Date.today - 1.month,
       goal:        50000
       )
-  end 
+  end
 
   def new_project
     Project.new(
