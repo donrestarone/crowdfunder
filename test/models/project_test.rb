@@ -85,6 +85,21 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal(1, Project.number_of_all_projects)
   end
 
+  test 'project_funding_returns_24' do
+    project = make_multiple_people_pledge_a_project
+    assert_equal(24, project.project_funding(project.id))
+  end
+
+  test 'projects_waiting_to_be_funded_returns_1' do
+    make_pledge_to_project
+    #make_multiple_people_pledge_a_project
+    project = new_project
+    owner = create(:user, first_name: "Bobby")
+    project.user = owner
+    project.save
+    assert_equal(1, Project.projects_waiting_to_be_funded)
+
+  end
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',
@@ -111,7 +126,7 @@ class ProjectTest < ActiveSupport::TestCase
     project.user = owner
     project.save
 
-    pledger = create(:user, first_name: "Bob")
+    pledger = create(:user, first_name: "Bobbert")
     a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
     return project
   end
