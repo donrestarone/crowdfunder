@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :not_authenticated, only: [:new, :create]
+  before_action :not_authenticated, only: [:new, :create, :myprojects]
 
   def index
     @projects = Project.all
@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     @project.start_date = params[:project][:start_date]
     @project.end_date = params[:project][:end_date]
     @project.image = params[:project][:image]
-
+    @project.user_id = current_user.id
     if @project.save
       redirect_to projects_url
     else
@@ -41,5 +41,9 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+   def myprojects
+     @projects = current_user.projects
+   end
 
 end

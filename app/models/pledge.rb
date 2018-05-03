@@ -15,11 +15,11 @@ class Pledge < ApplicationRecord
   end
 
   def self.sum_of_all_pledges_for_all_projects
-    total = Pledge.all.sum(:dollar_amount) 
+    total = Pledge.all.sum(:dollar_amount)
     return  total
-  end 
+  end
 
-  def self.all_pledges 
-    all_pledges = Pledge.all
-  end 
+  # def self.all_pledges
+  #   all_pledges = Pledge.all
+  # end
 end
