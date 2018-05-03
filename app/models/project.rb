@@ -39,8 +39,8 @@ class Project < ActiveRecord::Base
     all_projects = Project.all
     funded_projects = []
     all_projects.each do |project|
-      Pledge.all_pledges.each do |pledge|
-        if project.id == pledge.project_id
+      project.pledges.each do |pledge|
+        if pledge
           funded_projects.push project
         end
       end
