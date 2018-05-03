@@ -21,4 +21,36 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, email: "bettymaker@gmail.com", password: "1234", password_confirmation: "1234")
     refute user.valid?
   end
+
+  test 'projects_backed_returns_empty' do
+    user = build(:user)
+    assert_empty user.projects_backed
+  end
+
+  test 'projects_backed_returns_1' do
+    user = make_pledge_to_project
+    assert_equal(1, user.projects_backed.count)
+
+  end
+
+  def make_pledge_to_project
+    project = new_project
+    owner = create(:user, first_name: "Cletus")
+    project.user = owner
+    project.save
+
+    pledger = create(:user, first_name: "Bobbert")
+    a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
+    return pledger
+  end
+
+  def new_project
+    Project.new(
+      title:       'Cool new boardgame',
+      description: 'Trade sheep',
+      start_date:  Date.today + 1.day,
+      end_date:    Date.today + 1.month,
+      goal:        50000
+    )
+  end
 end

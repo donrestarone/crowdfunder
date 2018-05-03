@@ -41,6 +41,9 @@ class ProjectsController < ApplicationController
 
    def myprojects
      @projects = current_user.projects
-   end
+     @num_projects_backed_by_self = current_user.projects_backed.count
+
+     @backed_projects_by_self = current_user.name_of_projects_backed
+    end
 
 end

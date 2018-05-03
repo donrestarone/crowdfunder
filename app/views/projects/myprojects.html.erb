@@ -1,2 +1,15 @@
 <%= render 'show_projects', projects: @projects %>
 <h1>Projects you have backed</h1>
+<p> you have backed
+<%= @num_projects_backed_by_self %>
+  <% if @num_projects_backed_by_self == 1 %>
+    project
+  <% else %>
+    projects
+  <% end %>
+</p>
+<% @backed_projects_by_self.each do |project| %>
+<p>
+<%= project.title %>
+</p>
+<% end %>
