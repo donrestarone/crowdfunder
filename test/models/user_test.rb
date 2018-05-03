@@ -21,4 +21,9 @@ class UserTest < ActiveSupport::TestCase
     user = build(:user, email: "bettymaker@gmail.com", password: "1234", password_confirmation: "1234")
     refute user.valid?
   end
+
+  test 'project_show_page_displays_amount_pledged_by_user' do
+
+  end
+
 end

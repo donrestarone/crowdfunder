@@ -39,11 +39,9 @@ class ProjectTest < ActiveSupport::TestCase
   end
 
   test 'project_date_must_be_in_future' do
-
     project = build(:project, title:'Cool board', description: 'Trade stuff', start_date: Date.today, end_date:    Date.today - 1.month,goal:50000)
 
     project.save
     assert project.invalid?, 'project should not save if date is not in the future'
   end
-
 end

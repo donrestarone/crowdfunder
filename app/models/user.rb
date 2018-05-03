@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: :create
 
   validates :email, uniqueness: true
+
+  def amount_pledged_to_project(project)
+    pledges.where(project_id:project.id).sum(:dollar_amount)
+  end
+
 end
