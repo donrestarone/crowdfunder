@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :category %>
+    <%= collection_select(:category, :category, @categories, :id, :name, {:prompt => 'Select'})%>
+  </div>
+
+  <div class="field">
     <%= f.label :image %>
     <%= f.text_field :image %>
   </div>

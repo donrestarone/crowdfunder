@@ -6,6 +6,7 @@ FactoryGirl.define do
       end_date    Date.today + 1.month
       goal        50000
       user #uses the user factory automaticaly
+      category
 
   end
 end

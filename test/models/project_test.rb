@@ -96,7 +96,14 @@ class ProjectTest < ActiveSupport::TestCase
     project.save
     assert_equal(1, Project.projects_waiting_to_be_funded)
   end
-  
+
+  test 'testing the association belongs_to categories' do
+    category = build(:category)
+    project = build(:project)
+    project_category = project.category
+    assert(project_category)
+  end
+
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',

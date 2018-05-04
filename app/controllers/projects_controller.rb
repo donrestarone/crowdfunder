@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.rewards.build
+    @categories = Category.all
   end
 
   def create
@@ -55,18 +56,18 @@ class ProjectsController < ApplicationController
 
 
    def myprojects
-     
+
      @visit_owner = params[:format]
      if @visit_owner
       @user = User.find(@visit_owner)
-      else 
-      
+      else
+
       @user = current_user
       end
       @projects = @user.projects
      @num_projects_backed_by_self = @user.projects_backed.count
 
      @backed_projects_by_self = @user.name_of_projects_backed
-    
+
     end
 end
