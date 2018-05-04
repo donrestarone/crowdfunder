@@ -23,8 +23,7 @@ class Project < ActiveRecord::Base
     else
       return "This project has no owner"
     end
-    owner_name = User.find(owner).full_name
-
+    owner_name = User.find(owner)
   end
 
   def projects_of_owner
