@@ -30,6 +30,7 @@ class PledgeTest < ActiveSupport::TestCase
 
   end
 
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',
