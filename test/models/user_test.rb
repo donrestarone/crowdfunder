@@ -59,6 +59,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal('Bobbert Lastname', pledger.full_name)
   end
 
+  test 'name_of_projects_backed_returns_true' do
+    pledger = make_pledge_to_project
+    assert(pledger.name_of_projects_backed)
+  end
   def make_pledge_to_project
     project = new_project
     owner = create(:user, first_name: "Cletus")
