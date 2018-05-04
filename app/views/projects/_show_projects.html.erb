@@ -1,4 +1,27 @@
 <% projects.each do |project| %>
+<div class="row">
+  <div class="col-md-7">
+      <% if project.image %>
+        <%= image_tag project.image, class: "img-fluid rounded mb-3 mb-md-0" %>
+      <% else %>
+        <%= image_tag  ActionController::Base.helpers.asset_path("default.jpg"), class: "img-fluid rounded mb-3 mb-md-0" %>
+      <% end %>
+  </div>
+  <div class="col-md-5">
+    <h3><%= project.title %></h3>
+    <p>  <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></p>
+    <a> <%= link_to 'View Project', root_path, class: "btn btn-primary" %> </a>
+  </div>
+</div>
+<hr>
+<% end %>
+
+
+
+
+
+
+<!-- <% projects.each do |project| %>
   <article class="project">
     <%= link_to project, class: 'project-link' do %>
       <figure class="project-image">
@@ -14,4 +37,4 @@
         <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
     <% end %>
   </article>
-<% end %>
+<% end %> -->
