@@ -21,6 +21,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @review = Review.new
+
     @project = Project.find(params[:id])
     @project_owner = @project.owner_of_project
     @projects_by_owner = @project.projects_of_owner
@@ -30,6 +32,8 @@ class ProjectsController < ApplicationController
     if current_user
       @pledge_amount = current_user.amount_pledged_to_project(@project)
     end
+
+    @project_reviews = @project.reviews
   end
 
   def new
@@ -58,11 +62,10 @@ class ProjectsController < ApplicationController
    def myprojects
 
      @visit_owner = params[:format]
-     if @visit_owner
-      @user = User.find(@visit_owner)
+      if @visit_owner
+        @user = User.find(@visit_owner)
       else
-
-      @user = current_user
+        @user = current_user
       end
       @projects = @user.projects
      @num_projects_backed_by_self = @user.projects_backed.count
