@@ -3,6 +3,9 @@ class Project < ActiveRecord::Base
   has_many :pledges
   has_many :users, through: :pledges # backers
   belongs_to :user # project owner
+  #reviews
+  has_many :reviews
+  # has_many :users, through: :reviews, as: :userReviews
 
   validate :project_date_must_be_in_future
   validate :project_end_date_is_later_than_start_date

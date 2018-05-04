@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :pledges
   has_many :projects
+  #reviews
+  has_many :reviews
+  # has_many :projects, through: :reviews
 
   validates :password, length: { minimum: 8 }, on: :create
   validates :password, confirmation: true, on: :create
@@ -12,7 +15,7 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-  
+
   def projects_backed
     return self.pledges
   end
@@ -25,10 +28,10 @@ class User < ActiveRecord::Base
     end
     return projects
   end
-  
+
   def amount_pledged_to_project(project)
     pledges.where(project_id:project.id).sum(:dollar_amount)
- 
+
   end
 
 end
