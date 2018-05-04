@@ -17,6 +17,28 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def owner_of_project
+    if self.user_id
+      owner = self.user_id
+    else
+      return "This project has no owner"
+    end
+    owner_name = User.find(owner).full_name
+
+  end
+
+  def projects_of_owner
+    all_projects = Project.all
+    owner = self.user_id
+    projects = []
+    all_projects.each do |project|
+      if project.user_id == self.user_id
+        projects.push project
+      end
+    end
+    return projects
+  end
+
   def project_date_must_be_in_future
   	present_time = Time.now
   	if Time.now > self.start_date

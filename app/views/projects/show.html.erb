@@ -6,6 +6,16 @@
 
 <p><%= @project.description %></p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
+<p>Brought to you by: <%= @project_owner %></p>
+<p>Other projects by this user</p>
+  <% @projects_by_owner.each do |project| %>
+  <ul>
+    <li>
+    <%= project.title %>
+    <%= project.goal %>
+    </li>
+  </ul>
+  <% end %>
 <p>Raised So Far: $<%= @funding_thus_far %></p>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
