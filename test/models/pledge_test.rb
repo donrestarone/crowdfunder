@@ -20,6 +20,7 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
+#trying to fix this issue adding random comments
   test 'sum_of_all_pledges_for_all_projects_returns_20' do
     pledge = build(:pledge, user: new_user, project: new_project)
     pledge.save

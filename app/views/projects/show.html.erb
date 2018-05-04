@@ -1,14 +1,19 @@
+<hr>
+
+<div class="container">
 <h1><%= @project.title %></h1>
 
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
-
-<p><%= @project.description %></p>
-<p>Goal: <%= number_to_currency(@project.goal) %></p>
-<p>Raised So Far: $<%= @funding_thus_far %></p>
-<p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
-<p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+  
+<small>
+<p class="my-4"><%= @project.description %></p>
+<p class="my-4">Goal: <%= number_to_currency(@project.goal) %></p>
+<p class="my-4">Raised So Far: $<%= @funding_thus_far %></p>
+<p class="my-4">Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
+<p class="my-4">Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+</small>
 
 <% if current_user  %>
 <p>You have pledged $<%= @pledge_amount %></p>
@@ -16,30 +21,31 @@
 
 <%= form_for [@project, Pledge.new] do |f| %>
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
-  <%= f.submit "Pledge" %>
+  <%= f.submit "Pledge", class: "btn btn-primary" %>
 <% end %>
 
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>
-  <p><%= reward.description %></p>
+  <p class="my-4"><%= reward.description %></p>
 
   <p>
     <small>
-      <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+      <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete', class: "btn btn-secondary" %>
     </small>
   </p>
 <% end %>
 
-<%= link_to "Add new reward", new_project_reward_path(@project) %>
+<%= link_to "Add new reward", new_project_reward_path(@project), class: "btn btn-primary" %>
 <% if current_user %>
-  <h2>People backed this project</h2>
+  <h2 class="my-4">People backed this project</h2>
   <ul>
     <% @project.users.each do |user| %>
         <li><%= user.full_name %></li>
     <% end %>
   </ul>
 <% end %>
+
 
 <!-- review -->
 <%= render partial: 'reviews/review_form', locals: {a_review: @review, project: @project} %>
@@ -61,3 +67,7 @@
 <%else%>
   <p> No reviews </p>
 <%end%>
+
+<hr>
+</div>
+

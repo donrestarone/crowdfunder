@@ -12,18 +12,52 @@
   </head>
 
   <body>
-    <header class="site-header">
-      <h1 class="logo">Crowdfunder</h1>
 
-      <nav class="site-nav">
-        <% if current_user %>
-          <%= link_to "Logout", :logout, method: :delete %>
-        <% else %>
-          <%= link_to "Register", new_user_path %> |
-          <%= link_to "Login", :login %>
-        <% end %>
-      </nav>
-    </header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/"><h1 class="logo">Crowdfunder</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+
+            </li>
+            <% if current_user %>
+            <li class="nav-link">
+              <a class="nav-link"><%= link_to "New Project", new_project_path, class: "nav-link" %></a>
+            </li>
+            <li class="nav-link">
+              <a class="nav-link"><%= link_to "My Projects", myprojects_path, class: "nav-link" %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "Logout", :logout, method: :delete, class: "nav-link" %></a>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "Register", new_user_path, class: "nav-link" %> </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "Login", :login, class: "nav-link" %></a>
+            </li>
+            <% end %>
+
+          </ul>
+        </div>
+
+      </div>
+      <li class="nav-item">
+      <%= form_for :search, method: :get do |f| %>
+        <%= f.text_field :title, value: @search_query %>
+        <%= f.submit "search", class: "btn btn-secondary" %>
+      <% end %>
+    </li>
+    </nav>
+
+
+    <header class="site-header">
 
     <% flash.each do |key, message| %>
       <div class="flash-<%= key %>"><%= message %></div>
@@ -33,8 +67,10 @@
       <%= yield %>
     </main>
 
-    <footer class="site-footer">
-      <small>A Bitmaker assignment</small>
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; <br> <br>Hasan - Shahshike - Behram - Sean</p>
+      </div>
     </footer>
   </body>
 </html>
