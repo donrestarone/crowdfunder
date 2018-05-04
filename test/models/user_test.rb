@@ -63,6 +63,7 @@ class UserTest < ActiveSupport::TestCase
     pledger = make_pledge_to_project
     assert(pledger.name_of_projects_backed)
   end
+
   def make_pledge_to_project
     project = new_project
     owner = create(:user, first_name: "Cletus")
