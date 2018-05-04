@@ -34,6 +34,10 @@ class UserTest < ActiveSupport::TestCase
 
   end
 
+  test 'amount_pledged_to_project_returns_12' do
+
+  end
+
   def make_pledge_to_project
     project = new_project
     owner = create(:user, first_name: "Cletus")
