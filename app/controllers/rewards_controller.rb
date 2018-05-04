@@ -24,6 +24,8 @@ class RewardsController < ApplicationController
     redirect_to project_url(@project), notice: 'Reward successfully removed'
   end
 
+
+
   private
 
   def load_project

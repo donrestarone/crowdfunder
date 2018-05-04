@@ -6,7 +6,7 @@
 <% if @project.image.present? %>
   <%= image_tag @project.image %>
 <% end %>
-  
+
 <small>
 <p class="my-4"><%= @project.description %></p>
 <p class="my-4">Goal: <%= number_to_currency(@project.goal) %></p>
@@ -25,6 +25,11 @@
 <% end %>
 
 <h2>Rewards</h2>
+
+<!-- <% if current_user  %>
+<p>The following rewards have been claimed: <%= @rewards_claimed %></p>
+<% end  %> -->
+
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>
   <p class="my-4"><%= reward.description %></p>

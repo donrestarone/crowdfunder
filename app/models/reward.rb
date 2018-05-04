@@ -7,6 +7,11 @@ class Reward < ActiveRecord::Base
 
   belongs_to :project
 
+  # def assign_reward
+  #   if
+  #
+  #   end
+  # end
 
 
 end

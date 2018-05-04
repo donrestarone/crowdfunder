@@ -30,6 +30,10 @@ class ProjectsController < ApplicationController
     if current_user
       @pledge_amount = current_user.amount_pledged_to_project(@project)
     end
+
+    # if current_user
+    #   @rewards_claimed = current_user.rewards_claimed_for_project(@project)
+    # end
   end
 
   def new
@@ -55,18 +59,18 @@ class ProjectsController < ApplicationController
 
 
    def myprojects
-     
+
      @visit_owner = params[:format]
      if @visit_owner
       @user = User.find(@visit_owner)
-      else 
-      
+      else
+
       @user = current_user
       end
       @projects = @user.projects
      @num_projects_backed_by_self = @user.projects_backed.count
 
      @backed_projects_by_self = @user.name_of_projects_backed
-    
+
     end
 end

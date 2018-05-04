@@ -49,6 +49,12 @@ class Project < ActiveRecord::Base
     return funding_thus_far
   end
 
+  def display_rewards(project_id)
+    project = Project.find(project_id)
+    rewards_claimed = project.rewards
+    return rewards_claimed
+  end
+
   def self.number_of_all_projects
     total = Project.all.count
     return total

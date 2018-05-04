@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-  
+
   def projects_backed
     return self.pledges
   end
@@ -25,10 +25,14 @@ class User < ActiveRecord::Base
     end
     return projects
   end
-  
+
+  # def rewards_claimed_for_project(project)
+  #   rewards.where(project_id:project.id)
+  # end
+
   def amount_pledged_to_project(project)
     pledges.where(project_id:project.id).sum(:dollar_amount)
- 
   end
+
 
 end
