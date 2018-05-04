@@ -96,7 +96,19 @@ class ProjectTest < ActiveSupport::TestCase
     project.save
     assert_equal(1, Project.projects_waiting_to_be_funded)
   end
-  
+
+  test 'owner_of_project_returns_true' do
+    a_project = make_multiple_people_pledge_a_project
+    assert(a_project.owner_of_project)
+  end
+
+  test 'owner_of_project_returns_one' do
+    a_project = make_multiple_people_pledge_a_project
+    owner = a_project.owner_of_project
+
+    assert_equal("Cletus", owner.first_name)
+  end
+
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',
