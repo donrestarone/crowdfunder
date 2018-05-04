@@ -48,7 +48,7 @@ class ProjectTest < ActiveSupport::TestCase
     project.save
     assert project.invalid?, 'project should not save if date is not in the future'
   end
-
+#trying to fix this issue adding random comments
   test 'how_many_projects_funded_returns_nil' do
     project = new_project
     owner = new_user
@@ -84,7 +84,7 @@ class ProjectTest < ActiveSupport::TestCase
     make_multiple_people_pledge_a_project
     assert_equal(1, Project.number_of_all_projects)
   end
-
+#trying to fix this issue adding random comments
   test 'project_funding_returns_24' do
     project = make_multiple_people_pledge_a_project
     assert_equal(24, project.project_funding(project.id))
