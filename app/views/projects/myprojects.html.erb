@@ -2,6 +2,13 @@
 <hr>
 <div class="container">
 
+<h1 class="my-4">Projects you have backed</h1>
+<small> you have backed
+<%= @num_projects_backed_by_self %>
+  <% if @num_projects_backed_by_self == 1 %>
+    project
+  <% else %>
+    projects
 
 <% if @visit_owner %>
 <h1 class="my-4">Projects by <%= @user.full_name %></h1>
@@ -19,6 +26,7 @@
   <p>
   <%= project.title %>
   </p>
+    
   <% end %>
   </small>
 <% end %>

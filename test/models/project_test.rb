@@ -97,6 +97,13 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal(1, Project.projects_waiting_to_be_funded)
   end
 
+
+  test 'testing the association belongs_to categories' do
+    category = build(:category)
+    project = build(:project)
+    project_category = project.category
+    assert(project_category)
+
   test 'owner_of_project_returns_true' do
     a_project = make_multiple_people_pledge_a_project
     assert(a_project.owner_of_project)
@@ -117,6 +124,7 @@ class ProjectTest < ActiveSupport::TestCase
   test 'projects_of_owner_returns_one' do
     a_project = make_multiple_people_pledge_a_project
     assert_equal(1, a_project.projects_of_owner.count)
+
   end
 
   def new_invalid_project_end_date_early
