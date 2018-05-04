@@ -20,8 +20,6 @@ class Project < ActiveRecord::Base
   def owner_of_project
     if self.user_id
       owner = self.user_id
-    else
-      return "This project has no owner"
     end
     owner_name = User.find(owner)
   end

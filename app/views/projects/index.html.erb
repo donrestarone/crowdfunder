@@ -1,11 +1,10 @@
 <% if current_user %>
   <%= link_to "New Project", new_project_path %>
   <%= link_to "My Projects", myprojects_path %>
-  <%= form_for :search, method: :get do |f| %>
-    <%= f.text_field :title, value: @search_query %>
-    <%= f.submit "search" %>
-  <% end %>
-
+<% end %>
+<%= form_for :search, method: :get do |f| %>
+  <%= f.text_field :title, value: @search_query %>
+  <%= f.submit "search" %>
 <% end %>
   <div>
     <p>
