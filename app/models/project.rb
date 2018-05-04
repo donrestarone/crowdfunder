@@ -18,7 +18,8 @@ class Project < ActiveRecord::Base
   end
 
   def owner_of_project(project)
-    owner_id = project.user_id 
+    owner_id = project.user_id
+    owner = User.find(owner_id)
   end
 
   def project_date_must_be_in_future
