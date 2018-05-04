@@ -1,3 +1,7 @@
+<br>
+<br>
+<div class="container">
+
 <h1>Add a reward for <%= @project.title %></h1>
 
 <%= form_for [@project, @reward] do |f| %>
@@ -11,5 +15,8 @@
     <%= f.text_area :description %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit "Add", class: "btn btn-primary"%>
 <% end %>
+
+</div>
+<hr>

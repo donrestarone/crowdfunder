@@ -1,11 +1,15 @@
-<% if @project.errors.full_messages.any? %>
-  <% @project.errors.full_messages.each do |msg| %>
-    <ul>
-      <li><%= msg %></li>
-    </ul>
-  <% end %>
-<% end %>
 
+<br>
+<br>
+<div class="container">
+  <h1>Create a new project</h1>
+  <% if @project.errors.full_messages.any? %>
+    <% @project.errors.full_messages.each do |msg| %>
+      <ul>
+        <li><%= msg %></li>
+      </ul>
+    <% end %>
+  <% end %>
 <%= form_for(@project, html: {multipart: true}) do |f| %>
   <div>
     <%= f.label :title %>
@@ -17,25 +21,26 @@
     <%= f.text_field :description %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :goal %>
     <%= f.number_field :goal %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :image %>
     <%= f.text_field :image %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :start_date %>
     <%= f.date_field :start_date %>
   </div>
 
-  <div>
+  <div class="field">
     <%= f.label :end_date %>
     <%= f.date_field :end_date %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit "Create", class: "btn btn-primary" %>
 <% end %>
+</div>
