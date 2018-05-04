@@ -17,9 +17,13 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def owner_of_project(project)
-    owner_id = project.user_id
-    owner = User.find(owner_id)
+  def owner_of_project
+    if self.user_id
+      owner = self.user_id
+    else
+      return "This project has no owner"
+    end
+    owner_name = User.find(owner).full_name
   end
 
   def project_date_must_be_in_future

@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @project_owner = owner_of_project(@project)
+    @project_owner = @project.owner_of_project
     @funding_thus_far = @project.project_funding(@project.id)
     @users = @project.users
 
