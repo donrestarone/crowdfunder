@@ -109,6 +109,16 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal("Cletus", owner.first_name)
   end
 
+  test 'projects_of_owner_returns_true' do
+    a_project = make_multiple_people_pledge_a_project
+    assert(a_project.projects_of_owner)
+  end
+
+  test 'projects_of_owner_returns_one' do
+    a_project = make_multiple_people_pledge_a_project
+    assert_equal(1, a_project.projects_of_owner.count)
+  end
+
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',
