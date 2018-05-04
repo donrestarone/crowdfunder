@@ -1,12 +1,8 @@
-<% if current_user %>
-  <%= link_to "New Project", new_project_path %>
-  <%= link_to "My Projects", myprojects_path %>
-<% end %>
-<%= form_for :search, method: :get do |f| %>
-  <%= f.text_field :title, value: @search_query %>
-  <%= f.submit "search" %>
-<% end %>
+<hr>
+<div class="container">
+<h1 class="my-4">All Projects </h1>
   <div>
+    <small>
     <p>
   Total Ongoing Projects: <%= @total_num_projects %>
     </p>
@@ -18,5 +14,7 @@
       projects awaiting to be funded: <%= @projects_waiting_funding %>
     </p>
   </div>
-
+</small>
+<hr>
 <%= render 'show_projects', projects: @projects %>
+</div>
