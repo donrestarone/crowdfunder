@@ -22,7 +22,9 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @funding_thus_far = @project.project_funding(params[:id])
+    @project_owner = @project.owner_of_project
+    @projects_by_owner = @project.projects_of_owner
+    @funding_thus_far = @project.project_funding(@project.id)
     @users = @project.users
 
     if current_user
@@ -53,10 +55,18 @@ class ProjectsController < ApplicationController
 
 
    def myprojects
-     @projects = current_user.projects
-     @num_projects_backed_by_self = current_user.projects_backed.count
+     
+     @visit_owner = params[:format]
+     if @visit_owner
+      @user = User.find(@visit_owner)
+      else 
+      
+      @user = current_user
+      end
+      @projects = @user.projects
+     @num_projects_backed_by_self = @user.projects_backed.count
 
-     @backed_projects_by_self = current_user.name_of_projects_backed
+     @backed_projects_by_self = @user.name_of_projects_backed
+    
     end
-
 end
