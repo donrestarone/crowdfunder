@@ -51,7 +51,7 @@
       <li class="nav-item">
       <%= form_for :search, method: :get do |f| %>
         <%= f.text_field :title, value: @search_query %>
-        <%= f.submit "search" %>
+        <%= f.submit "search", class: "btn btn-secondary" %>
       <% end %>
     </li>
     </nav>

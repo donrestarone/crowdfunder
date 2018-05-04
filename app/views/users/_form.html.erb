@@ -22,9 +22,10 @@
      <%= f.label :password_confirmation %><br />
      <%= f.password_field :password_confirmation %>
   </div>
-
+  <br>
   <div class="field">
-     <%= f.submit %>
+     <%= f.submit "Sign Up", class: "btn btn-primary" %>
+     <%= link_to 'Back', root_path, class: "btn btn-secondary" %>
   </div>
-
+<hr>
 <% end %>

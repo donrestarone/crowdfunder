@@ -10,7 +10,7 @@
   <div class="col-md-5">
     <h3><%= project.title %></h3>
     <p>  <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></p>
-    <a> <%= link_to 'View Project', root_path, class: "btn btn-primary" %> </a>
+    <a> <%= link_to 'View Project', project, class: "btn btn-primary" %> </a>
   </div>
 </div>
 <hr>
