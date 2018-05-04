@@ -45,5 +45,29 @@
     <% end %>
   </ul>
 <% end %>
+
+
+<!-- review -->
+<%= render partial: 'reviews/review_form', locals: {a_review: @review, project: @project} %>
+
+<h2> Reviews for <%= @project.title %> </h2>
+
+<% if @project_reviews %>
+  <ul>
+    <% @project_reviews.each do |a_review| %>
+      <li>
+        <%= a_review.content %><br>
+        <%= a_review.user.first_name %>
+        <%= a_review.created_at %>
+        <%= link_to 'Edit', edit_project_review_path(@project, a_review) %>
+        <%= link_to 'Delete', project_review_path(@project, a_review), method: :delete %>
+      </li>
+    <%end %>
+  </ul>
+<%else%>
+  <p> No reviews </p>
+<%end%>
+
 <hr>
 </div>
+
