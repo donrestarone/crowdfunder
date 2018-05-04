@@ -34,19 +34,21 @@ class UserTest < ActiveSupport::TestCase
 
   end
 
-  test 'amount_pledged_to_project_returns_12' do
-    skip
-    project = make_pledge_to_project_and_return_project
-    amount = amount_pledged_to_project(project)
-    assert(amount)
-
+  test 'amount_pledged_to_project_returns_false' do
+    project = create(:project)
+    user = create(:user, first_name: 'Sally')
+    user1 = create(:user, first_name: 'Ally')
+    user2 = create(:user, first_name: 'Lly')
+    pledge = create(:pledge, project: project, user: user2)
+    assert_equal(0, user1.amount_pledged_to_project(project))
   end
 
-  test 'amount_pledged_to_project_returns_false' do
-    skip
-    project = make_pledge_to_project_and_return_project
-    amount = amount_pledged_to_project(project)
-    refute(amount)
+  test 'amount_pledged_to_project_returns_10' do
+    project = create(:project)
+    user = create(:user, first_name: 'Sally')
+    pledge = create(:pledge, project: project, user: user)
+
+    assert_equal(10, user.amount_pledged_to_project(project))
   end
 
   test 'full_name_returns_true' do
@@ -93,6 +95,16 @@ class UserTest < ActiveSupport::TestCase
       start_date:  Date.today + 1.day,
       end_date:    Date.today + 1.month,
       goal:        50000
+    )
+  end
+
+  def new_user
+    User.new(
+      first_name:            'Sally',
+      last_name:             'Lowenthal',
+      email:                 'sally@example.com',
+      password:              'passpass',
+      password_confirmation: 'passpass'
     )
   end
 
