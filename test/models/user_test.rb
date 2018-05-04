@@ -35,7 +35,28 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'amount_pledged_to_project_returns_12' do
+    skip
+    project = make_pledge_to_project_and_return_project
+    amount = amount_pledged_to_project(project)
+    assert(amount)
 
+  end
+
+  test 'amount_pledged_to_project_returns_false' do
+    skip
+    project = make_pledge_to_project_and_return_project
+    amount = amount_pledged_to_project(project)
+    refute(amount)
+  end
+
+  test 'full_name_returns_true' do
+    pledger = make_pledge_to_project
+    assert(pledger.full_name)
+  end
+
+  test 'full_name_matches_expectation' do
+    pledger = make_pledge_to_project
+    assert_equal('Bobbert Lastname', pledger.full_name)
   end
 
   def make_pledge_to_project
@@ -47,6 +68,17 @@ class UserTest < ActiveSupport::TestCase
     pledger = create(:user, first_name: "Bobbert")
     a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
     return pledger
+  end
+
+  def make_pledge_to_project_and_return_project
+    project = new_project
+    owner = create(:user, first_name: "Cletus")
+    project.user = owner
+    project.save
+
+    pledger = create(:user, first_name: "Bobbert")
+    a_pledge = Pledge.create(dollar_amount: 12, user: pledger, project_id: project.id)
+    return project
   end
 
   def new_project
