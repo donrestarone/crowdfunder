@@ -9,6 +9,7 @@
 <p>Brought to you by: <%= link_to "#{@project_owner.full_name}", myprojects_path(@project_owner)%></p>
 <%= hidden_field(:project_owner, :id) %>
 
+
 <p>Other projects by this user</p>
   <% @projects_by_owner.each do |project| %>
   <ul>
