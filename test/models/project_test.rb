@@ -98,8 +98,8 @@ class ProjectTest < ActiveSupport::TestCase
     project.user = owner
     project.save
     assert_equal(1, Project.projects_waiting_to_be_funded)
-
   end
+  
   def new_invalid_project_end_date_early
     Project.new(
       title:       'Cool new boardgame',
