@@ -26,9 +26,8 @@
 
 <h2>Rewards</h2>
 
-<!-- <% if current_user  %>
-<p>The following rewards have been claimed: <%= @rewards_claimed %></p>
-<% end  %> -->
+<% if @pledge.dollar_amount >= 50  %>
+  <%=  %>
 
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>

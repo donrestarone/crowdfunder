@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
     @projects_by_owner = @project.projects_of_owner
     @funding_thus_far = @project.project_funding(@project.id)
     @users = @project.users
+    @pledge = @project.pledge_id
 
     if current_user
       @pledge_amount = current_user.amount_pledged_to_project(@project)

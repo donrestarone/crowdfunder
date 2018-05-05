@@ -1,5 +1,5 @@
 class Reward < ActiveRecord::Base
-
+  has_many :users, through: :pledges
   # Reward dollar_amount must be positive number
   validates :dollar_amount, :numericality => { :greater_than => 0 }, presence: true
   validates :description, presence: true
@@ -10,7 +10,7 @@ class Reward < ActiveRecord::Base
   # def assign_reward
   #   if
   #
-  #   end
+  #   endsd
   # end
 
 

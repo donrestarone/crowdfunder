@@ -20,6 +20,6 @@ class Pledge < ApplicationRecord
   end
 
   # def self.all_pledges
-  #   all_pledges = Pledge.all
+  #   all_pledges = Pledge.alld
   # end
 end
