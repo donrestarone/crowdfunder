@@ -1,0 +1,11 @@
+<%= form_for [project, a_review] do |f| %>
+  <p>
+    <%= f.label :review %>
+    <%= f.text_field :content %>
+  </p>
+
+  <p>
+    <%= f.submit 'Save' %>
+  </p>
+
+<% end %>
