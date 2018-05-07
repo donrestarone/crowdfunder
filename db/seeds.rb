@@ -1,3 +1,4 @@
+Category.destroy_all
 Pledge.destroy_all
 Reward.destroy_all
 User.destroy_all
