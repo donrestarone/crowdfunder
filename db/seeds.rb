@@ -20,7 +20,8 @@ end
               goal: rand(100000),
               start_date: Time.now.utc + 1.days,
               end_date: Time.now.utc + 10.days,
-              user: User.first
+              user: User.first,
+              category: Faker::Book.genre
             )
 
   5.times do
