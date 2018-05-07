@@ -13,6 +13,12 @@ Project.destroy_all
   )
 end
 
+8.times do
+  Category.create!(
+    name: Faker::Book.genre
+  )
+end
+
 10.times do
   project = Project.create!(
               title: Faker::App.name,
@@ -20,8 +26,7 @@ end
               goal: rand(100000),
               start_date: Time.now.utc + 1.days,
               end_date: Time.now.utc + 10.days,
-              user: User.first,
-              category: Faker::Book.genre
+              user: User.first
             )
 
   5.times do
