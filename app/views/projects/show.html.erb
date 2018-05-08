@@ -36,7 +36,7 @@
   <p class="my-4"><%= reward.description %></p>
   </small>
   <p>
-    <% if current_user %>
+    <% if current_user == @project_owner %>
     <small>
       <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete', class: "btn btn-secondary" %>
     </small>
@@ -45,7 +45,7 @@
   <hr>
 <% end %>
 
-<% if current_user %>
+<% if current_user == @project_owner %>
 <%= link_to "Add new reward", new_project_reward_path(@project), class: "btn btn-primary" %>
 <hr>
 <% end %>
@@ -60,7 +60,7 @@
 <% end %>
 
 <!-- review -->
-<% if current_user %>
+<% if current_user ==  %>
 <%= render partial: 'reviews/review_form', locals: {a_review: @review, project: @project} %>
 
 <h2> Reviews for <%= @project.title %> </h2>
