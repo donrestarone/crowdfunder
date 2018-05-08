@@ -50,14 +50,14 @@
 <hr>
 <% end %>
 
+<% if @project.users %>
   <h2 class="my-4">People backed this project</h2>
+<% @project.users.each do |user| %>
   <ul>
-    <% @project.users.each do |user| %>
         <li><%= user.full_name %></li>
-
   </ul>
 <% end %>
-
+<% end %>
 
 <!-- review -->
 <% if current_user %>
