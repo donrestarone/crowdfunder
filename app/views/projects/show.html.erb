@@ -60,9 +60,9 @@
 <% end %>
 
 <!-- review -->
-<% if current_user ==  %>
+<% if current_user %>
 <%= render partial: 'reviews/review_form', locals: {a_review: @review, project: @project} %>
-
+<% end %>
 <h2> Reviews for <%= @project.title %> </h2>
 
 <% if @project_reviews %>
@@ -74,13 +74,15 @@
         <%= a_review.content %><br>
         <%= a_review.user.first_name %>
         <%= a_review.created_at %>
+        <% if current_user == @project_owner %>
         <%= link_to 'Edit', edit_project_review_path(@project, a_review) %>
         <%= link_to 'Delete', project_review_path(@project, a_review), method: :delete %>
+        <% end %>
     <% end %>
   </ul>
 <% else %>
   <p> No reviews </p>
-<% end %>
+
 <% end %>
   </div>
 </div>
